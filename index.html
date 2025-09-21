@@ -616,7 +616,6 @@
                 background: rgba(0, 0, 0, 0.3);
                 padding: 10px 15px;
                 border-radius: 20px;
-                border: 1px solid var(--border);
                 backdrop-filter: blur(10px);
             }
 
@@ -717,12 +716,6 @@
     </style>
 </head>
 <body>
-    <!-- Mobile Scroll Hint -->
-    <div class="mobile-scroll-hint" id="mobileScrollHint">
-        <span class="mobile-scroll-text">Scroll</span>
-        <div class="mobile-scroll-arrow"></div>
-    </div>
-
     <!-- Scroll Down Indicator (Desktop) -->
     <div class="scroll-indicator" id="scrollIndicator">
         <span class="scroll-text">SCROLL DOWN</span>
@@ -762,6 +755,8 @@
             </div>
         </div>
     </nav>
+
+
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -925,6 +920,31 @@
     </footer>
 
     <script>
+        // Create mobile scroll hint only on mobile
+        function createMobileScrollHint() {
+            if (window.innerWidth <= 768) {
+                if (!document.getElementById('mobileScrollHint')) {
+                    const mobileHint = document.createElement('div');
+                    mobileHint.id = 'mobileScrollHint';
+                    mobileHint.className = 'mobile-scroll-hint';
+                    mobileHint.innerHTML = `
+                        <span class="mobile-scroll-text">Scroll</span>
+                        <div class="mobile-scroll-arrow"></div>
+                    `;
+                    document.body.appendChild(mobileHint);
+                }
+            } else {
+                const existingHint = document.getElementById('mobileScrollHint');
+                if (existingHint) {
+                    existingHint.remove();
+                }
+            }
+        }
+
+        // Create mobile hint on load and resize
+        createMobileScrollHint();
+        window.addEventListener('resize', createMobileScrollHint);
+
         // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
