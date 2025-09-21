@@ -477,8 +477,16 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 5px;
+            padding: 8px;
             z-index: 1001;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .mobile-menu-btn span {
@@ -567,19 +575,20 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             .hero .subtitle {
-                font-size: 1rem;
+                font-size: 1.1rem;
+                letter-spacing: 2px;
             }
             
             .nav-links {
-                display: none;
+                display: none !important;
             }
 
             .mobile-menu-btn {
-                display: flex;
+                display: flex !important;
             }
             
             .grid {
@@ -587,7 +596,62 @@
             }
 
             .scroll-indicator {
-                right: 15px;
+                display: none !important;
+            }
+
+            /* Mobile scroll hint - ensure it shows */
+            .mobile-scroll-hint {
+                display: flex !important;
+                position: fixed;
+                bottom: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1000;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                opacity: 0.8;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                background: rgba(0, 0, 0, 0.3);
+                padding: 10px 15px;
+                border-radius: 20px;
+                border: 1px solid var(--border);
+                backdrop-filter: blur(10px);
+            }
+
+            .mobile-scroll-hint.hidden {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            .mobile-scroll-text {
+                color: var(--accent);
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                font-weight: 500;
+            }
+
+            .mobile-scroll-arrow {
+                width: 16px;
+                height: 16px;
+                border-right: 2px solid var(--accent);
+                border-bottom: 2px solid var(--accent);
+                transform: rotate(45deg);
+                animation: mobileBounce 2s infinite;
+            }
+
+            @keyframes mobileBounce {
+                0%, 20%, 50%, 80%, 100% {
+                    transform: rotate(45deg) translateY(0);
+                }
+                40% {
+                    transform: rotate(45deg) translateY(-3px);
+                }
+                60% {
+                    transform: rotate(45deg) translateY(-1px);
+                }
             }
 
             .scroll-text {
@@ -601,11 +665,45 @@
             .terminal {
                 margin: 20px auto;
                 padding: 15px;
+                max-width: 90%;
             }
 
             .hero {
                 padding: 40px 0;
-                min-height: 80vh;
+                min-height: 85vh;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        /* Larger mobile devices */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .terminal {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
             }
         }
 
@@ -619,10 +717,30 @@
     </style>
 </head>
 <body>
-    <!-- Scroll Down Indicator -->
+    <!-- Mobile Scroll Hint -->
+    <div class="mobile-scroll-hint" id="mobileScrollHint">
+        <span class="mobile-scroll-text">Scroll</span>
+        <div class="mobile-scroll-arrow"></div>
+    </div>
+
+    <!-- Scroll Down Indicator (Desktop) -->
     <div class="scroll-indicator" id="scrollIndicator">
         <span class="scroll-text">SCROLL DOWN</span>
         <div class="scroll-arrow"></div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-links">
+            <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="#writeups" onclick="closeMobileMenu()">Writeups</a></li>
+            <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
+            <li><a href="#achievements" onclick="closeMobileMenu()">Achievements</a></li>
+            <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+        </ul>
     </div>
 
     <!-- Navigation -->
@@ -636,6 +754,12 @@
                 <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <!-- Mobile Menu Button -->
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
@@ -801,6 +925,35 @@
     </footer>
 
     <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+        function toggleMobileMenu() {
+            mobileMenuBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        function closeMobileMenu() {
+            mobileMenuBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        });
+
         // Add smooth reveal animations on scroll
         const observerOptions = {
             threshold: 0.1,
@@ -857,18 +1010,21 @@
         // Create particles less frequently
         setInterval(createParticle, 800);
 
-        // Scroll down indicator functionality
+        // Scroll indicators functionality
         const scrollIndicator = document.getElementById('scrollIndicator');
+        const mobileScrollHint = document.getElementById('mobileScrollHint');
         
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const windowHeight = window.innerHeight;
             
-            // Hide the indicator after scrolling past the first section
+            // Hide the indicators after scrolling past the first section
             if (scrollTop > windowHeight * 0.3) {
                 scrollIndicator.classList.add('hidden');
+                if (mobileScrollHint) mobileScrollHint.classList.add('hidden');
             } else {
                 scrollIndicator.classList.remove('hidden');
+                if (mobileScrollHint) mobileScrollHint.classList.remove('hidden');
             }
         });
 
