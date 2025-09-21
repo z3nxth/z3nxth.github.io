@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iftekhar Syed | Red Team Operator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@latest/index.css">
+    <style>
+        @import url('-apple-system-font');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000000;
+            --secondary: #1a1a1a;
+            --accent: #ffffff;
+            --text: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --success: #ffffff;
+            --warning: #888888;
+            --card-bg: rgba(26, 26, 26, 0.8);
+            --border: rgba(255, 255, 255, 0.15);
+        }
+
+        body {
+            font-family: 'Maple Mono', 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Professional background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 30px 0;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: '>';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 60px 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+        }
+
+        .terminal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.05);
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #888888; }
+        .terminal-dot.yellow { background: #aaaaaa; }
+        .terminal-dot.green { background: #ffffff; }
+
+        .terminal-content {
+            font-family: monospace;
+            color: var(--success);
+            line-height: 1.6;
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end);
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            letter-spacing: -0.01em;
+        }
+
+        .section-title::before {
+            content: '';
+            color: var(--accent);
+        }
+
+        .section-title::after {
+            content: '';
+            color: var(--accent);
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+            border-radius: 10px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            color: var(--success);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s;
+        }
+
+        .card-link:hover {
+            gap: 10px;
+        }
+
+        .card-link::after {
+            content: '→';
+        }
+
+        /* Achievements */
+        .achievement-item {
+            background: var(--card-bg);
+            border-left: 3px solid var(--accent);
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(10px);
+            border-left-color: var(--success);
+        }
+
+        .achievement-year {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        /* Skills Tags */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Remove original custom scrollbar */
+        ::-webkit-scrollbar { display: none; }
+
+        /* Scroll progress bar */
+        #scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--accent);
+            z-index: 2000;
+            transition: width 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="scroll-indicator"></div>
+   linear-gradient
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">IS</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#writeups">Writeups</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Iftekhar Syed</h1>
+                <p class="subtitle">HARDWARE/SOFTWARE PENETRATION TESTER</p>
+          <p class="subtitle">THIS PORTFOLIO IS UNFINISHED AND INCOMPLETE!</p>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                    </div>
+                    <div class="terminal-content">
+                        <p class="typing"><b><i>[iftekhar]></b></i>whoami</p><br>
+                        <p>hey! I'm Iftekhar. I enjoy both Hardware and Software exploitation. <br>my experience ranges from RF Exploitation to OSCP-like software penetration testing.</p>
+                        <br><p>scroll down a little to read more!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Writeups Section -->
+    <section id="writeups">
+        <div class="container">
+            <h2 class="section-title">CTFs & Writeups</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Active Directory Exploitation</h3>
+                    <p>Comprehensive guide on exploiting misconfigured AD environments through Kerberoasting, ASREPRoasting, and privilege escalation techniques.</p>
+                    <div class="skills">
+                        <span class="skill-tag">Kerberos</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">BloodHound</span>
+                    </div>
+                    <a href="/writeups/ad-exploitation" class="card-link">Read More</a>
+                </div>
+                <div class="card">
+                    <h3>Web Application Pentesting</h3>
+                    <p>Deep dive into modern web vulnerabilities including XXE, SSRF, and advanced SQL injection techniques in cloud environments.</p>
+                    <div class="skills">
+                        <span class="skill-tag">OWASP</span>
+                        <span class="skill-tag">Burp Suite</span>
+                        <span class="skill-tag">SQLMap</span>
+                    </div>
+                    <a href="/writeups/webapp-pentest" class="card-link">Read More</a>
+                </div>
+                <div class="card">
+                    <h3>Binary Exploitation Series</h3>
+                    <p>From buffer overflows to ROP chains - a systematic approach to pwning binaries with modern mitigation bypasses.</p>
+                    <div class="skills">
+                        <span class="skill-tag">GDB</span>
+                        <span class="skill-tag">Assembly</span>
+                        <span class="skill-tag">ROP</span>
+                    </div>
+                    <a href="/writeups/binary-exploitation" class="card-link">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>AutoPwn Framework</h3>
+                    <p>Automated penetration testing framework with modular architecture for reconnaissance, exploitation, and post-exploitation.</p>
+                    <div class="skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Metasploit</span>
+                        <span class="skill-tag">Docker</span>
+                    </div>
+                    <a href="https://github.com/yourusername/autopwn" class="card-link">View Project</a>
+                </div>
+                <div class="card">
+                    <h3>CloudSec Scanner</h3>
+                    <p>Cloud security posture assessment tool for AWS, Azure, and GCP environments with automated vulnerability detection.</p>
+                    <div class="skills">
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Kubernetes</span>
+                    </div>
+                    <a href="https://github.com/yourusername/cloudsec" class="card-link">View Project</a>
+                </div>
+                <div class="card">
+                    <h3>Threat Intelligence Platform</h3>
+                    <p>OSINT aggregation platform combining multiple threat feeds with ML-based analysis for predictive threat detection.</p>
+                    <div class="skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">ElasticSearch</span>
+                        <span class="skill-tag">React</span>
+                    </div>
+                    <a href="https://github.com/yourusername/threat-intel" class="card-link">View Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+        <div class="container">
+            <h2 class="section-title">Notable Achievements</h2>
+        <div class="achievement-item">
+                <div class="achievement-year">2025</div>
+                <h3>PCB Badges</h3>
+                <p>Custom-designed badge-like wearable PCBs with religious symbolism.</p>
+            <p><a href="https://nalayn-pcb-pin-badge-2lzy28o.gamma.site/">See here</a></p>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-year">2024</div>
+                <h3>Work Experience</h3>
+                <p>Work Experience with a startup company configuring SQL Databases and linking them to custom forms.</p>
+            </div>
+                        <div class="achievement-item">
+                <div class="achievement-year">2023</div>
+                <h3>Custom website for a local NGO Scout Group</h3>
+                <p>Designed a webpage for a non-profit local Scouting group.</p>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-year">2023</div>
+                <h3>CVE Discoveries</h3>
+                <p>Credited ith discovering 5 CVEs in enterprise software, including RCE vulnerabilities in Fortune 500 applications.</p>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-year">2022</div>
+                <h3>Security Research Publication</h3>
+                <p>Published research on novel attack vectors in containerized environments at IEEE Security & Privacy Symposium.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <a href="mailto:iftekharsyed@proton.me">iftekharsyed@proton.me</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🐙</div>
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/z3nxth">github.com/z3nxth</a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Iftekhar Syed. All rights reserved. | Built with precision and purpose.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth reveal animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and achievement items
+        document.querySelectorAll('.card, .achievement-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Terminal typing effect enhancement
+        const terminalLines = document.querySelectorAll('.terminal-content p');
+        terminalLines.forEach((line, index) => {
+            line.style.opacity = '0';
+            setTimeout(() => {
+                line.style.opacity = '1';
+                line.style.animation = 'fadeInUp 0.5s ease';
+            }, index * 500);
+        });
+
+        // Professional background particles (bigger white dots, less frequent)
+        const createParticle = () => {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(255, 255, 255, 0.5)';
+            particle.style.pointerEvents = 'none';
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = '-10px';
+            particle.style.zIndex = '0';
+            document.body.appendChild(particle);
+
+            const duration = Math.random() * 8 + 5;
+            particle.style.animation = `fall ${duration}s linear`;
+
+            setTimeout(() => particle.remove(), duration * 1000);
+        };
+
+        // Create particles less frequently
+        setInterval(createParticle, 800);
+
+        // Scroll progress bar
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (scrollTop / docHeight) * 100;
+            scrollIndicator.style.width = scrolled + '%';
+        });
+
+        // Add CSS animation for particles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(180deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
