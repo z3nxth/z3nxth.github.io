@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iftekhar Syed | Red Team Operator</title>
+    <title>Iftekhar Syed</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@latest/index.css">
     <style>
         @import url('-apple-system-font');
@@ -729,8 +729,9 @@
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu-links">
             <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="/blog" onclick="closeMobileMenu()">Blog</a></li>
             <li><a href="#writeups" onclick="closeMobileMenu()">Writeups</a></li>
-            <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
+            <!-- <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>-->
             <li><a href="#achievements" onclick="closeMobileMenu()">Achievements</a></li>
             <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
         </ul>
@@ -742,8 +743,9 @@
             <a href="#" class="logo">IS</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
                 <li><a href="#writeups">Writeups</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <!-- <li><a href="#projects">Projects</a></li> -->
                 <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -772,9 +774,8 @@
                         <span class="terminal-dot green"></span>
                     </div>
                     <div class="terminal-content">
-                        <p class="typing"><b><i>[iftekhar]></b></i>whoami</p><br>
+                        <p class="typing"><b><i>[iftekhar]> </b></i>whoami</p><br>
                         <p>hey! I'm Iftekhar. I enjoy both Hardware and Software exploitation. <br>my experience ranges from RF Exploitation to OSCP-like software penetration testing.</p>
-                        <br><p>scroll down a little to read more!</p>
                     </div>
                 </div>
             </div>
@@ -787,40 +788,21 @@
             <h2 class="section-title">CTFs & Writeups</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>Active Directory Exploitation</h3>
-                    <p>Comprehensive guide on exploiting misconfigured AD environments through Kerberoasting, ASREPRoasting, and privilege escalation techniques.</p>
+                    <h3>Exploiting SUID Bits: systemctl</h3>
+                    <p>An explanation on an infamous privesc vector: SUID bits, what they are and why they could potentially be dangerous.</p>
                     <div class="skills">
-                        <span class="skill-tag">Kerberos</span>
-                        <span class="skill-tag">PowerShell</span>
-                        <span class="skill-tag">BloodHound</span>
+                        <br>
+                        <span class="skill-tag">Privesc</span>
+                        <span class="skill-tag">CTF</span>
+                        <span class="skill-tag">Linux</span>
                     </div>
-                    <a href="/writeups/ad-exploitation" class="card-link">Read More</a>
-                </div>
-                <div class="card">
-                    <h3>Web Application Pentesting</h3>
-                    <p>Deep dive into modern web vulnerabilities including XXE, SSRF, and advanced SQL injection techniques in cloud environments.</p>
-                    <div class="skills">
-                        <span class="skill-tag">OWASP</span>
-                        <span class="skill-tag">Burp Suite</span>
-                        <span class="skill-tag">SQLMap</span>
-                    </div>
-                    <a href="/writeups/webapp-pentest" class="card-link">Read More</a>
-                </div>
-                <div class="card">
-                    <h3>Binary Exploitation Series</h3>
-                    <p>From buffer overflows to ROP chains - a systematic approach to pwning binaries with modern mitigation bypasses.</p>
-                    <div class="skills">
-                        <span class="skill-tag">GDB</span>
-                        <span class="skill-tag">Assembly</span>
-                        <span class="skill-tag">ROP</span>
-                    </div>
-                    <a href="/writeups/binary-exploitation" class="card-link">Read More</a>
+                    <a href="/blog/posts/systemctl-SUID-bit-exploitation/" class="card-link">Read More</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- 
     <section id="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
@@ -858,7 +840,7 @@
             </div>
         </div>
     </section>
-
+-->
     <!-- Achievements Section -->
     <section id="achievements">
         <div class="container">
