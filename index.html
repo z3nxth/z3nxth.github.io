@@ -27,7 +27,7 @@
         }
 
         body {
-            font-family: 'Maple Mono', 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
             background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
             color: var(--text);
             min-height: 100vh;
@@ -77,6 +77,7 @@
         }
 
         .logo {
+            font-family: 'Maple Mono', monospace;
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent);
@@ -103,6 +104,7 @@
         }
 
         .nav-links a {
+            font-family: 'Maple Mono', monospace;
             color: var(--text-secondary);
             text-decoration: none;
             transition: all 0.3s;
@@ -166,6 +168,7 @@
         }
 
         .hero .subtitle {
+            font-family: 'Maple Mono', monospace;
             font-size: 1.5rem;
             color: var(--text-secondary);
             margin-bottom: 30px;
@@ -201,7 +204,7 @@
         .terminal-dot.green { background: #ffffff; }
 
         .terminal-content {
-            font-family: monospace;
+            font-family: 'Maple Mono', monospace;
             color: var(--success);
             line-height: 1.6;
         }
@@ -263,6 +266,10 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
 
         .card::before {
@@ -286,35 +293,21 @@
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: inherit;
         }
 
         .card h3 {
             color: var(--accent);
             margin-bottom: 15px;
             font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .card p {
             color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 20px;
-        }
-
-        .card-link {
-            color: var(--success);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: gap 0.3s;
-        }
-
-        .card-link:hover {
-            gap: 10px;
-        }
-
-        .card-link::after {
-            content: '→';
         }
 
         /* Achievements */
@@ -336,6 +329,7 @@
             color: var(--accent);
             font-weight: bold;
             margin-bottom: 10px;
+            font-family: 'Maple Mono', monospace;
         }
 
         /* Contact Section */
@@ -367,10 +361,16 @@
             margin-bottom: 15px;
         }
 
+        .contact-item h3 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
         .contact-item a {
             color: var(--text);
             text-decoration: none;
             transition: color 0.3s;
+            font-weight: 500;
         }
 
         .contact-item a:hover {
@@ -386,6 +386,7 @@
         }
 
         .skill-tag {
+            font-family: 'Maple Mono', monospace;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--accent);
             padding: 5px 15px;
@@ -422,6 +423,7 @@
         }
 
         .scroll-text {
+            font-family: 'Maple Mono', monospace;
             writing-mode: vertical-rl;
             text-orientation: mixed;
             color: var(--text-secondary);
@@ -545,6 +547,7 @@
             display: block;
             padding: 10px 0;
             border-bottom: 1px solid transparent;
+            font-weight: 500;
         }
 
         .mobile-menu-links a:hover {
@@ -625,6 +628,7 @@
             }
 
             .mobile-scroll-text {
+                font-family: 'Maple Mono', monospace;
                 color: var(--accent);
                 font-size: 0.75rem;
                 letter-spacing: 1px;
@@ -713,6 +717,25 @@
 
         /* Remove original custom scrollbar */
         ::-webkit-scrollbar { display: none; }
+
+        /* Restore animations and particles */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
     </style>
 </head>
 <body>
@@ -758,8 +781,6 @@
         </div>
     </nav>
 
-
-
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
@@ -788,7 +809,7 @@
             <h2 class="section-title">CTFs & Writeups</h2>
             <div class="grid">
                 
-                <div class="card">
+                <a href="/blog/posts/systemctl-SUID-bit-exploitation/" class="card">
                     <h3>Exploiting SUID Bits: systemctl</h3>
                     <p>An explanation on an infamous privesc vector: SUID bits, what they are and why they could potentially be dangerous.</p>
                     <div class="skills">
@@ -797,21 +818,17 @@
                         <span class="skill-tag">CTF</span>
                         <span class="skill-tag">Software\Linux</span>
                     </div>
-                    <a href="/blog/posts/systemctl-SUID-bit-exploitation/" class="card-link">Read More</a>
-                </div>
+                </a>
 
-                <div class="card">
-                    <h3>Installing custom firware on the T-Embed CC1101</h3>
+                <a href="/blog/posts/CFW-TMBCC1101-installation/" class="card">
+                    <h3>Installing custom firmware on the T-Embed CC1101</h3>
                     <p>An installation guide for using Bruce on the T-Embed CC1101. This is a custom firmware that truly unlocks the capabilities of the TMB, maybe even turning it into a Flipper Zero killer with built-in WiFi?</p>
                     <div class="skills">
                         <br>
                         <span class="skill-tag">Hardware</span>
                         <span class="skill-tag">Pentesting</span>
                     </div>
-                    <a href="/blog/posts/CFW-TMBCC1101-installation/" class="card-link">Read More</a>
-                </div>
-
-                
+                </a>
             </div>
         </div>
     </section>
@@ -821,7 +838,7 @@
             <h2 class="section-title">Projects</h2>
             <div class="grid">
                 
-                <div class="card">
+                <a href="https://github.com/z3nxth/colourpeek" class="card">
                     <h3>Colourpeek</h3>
                     <p>An amazing tool to grab a colour palette from an image. Shows image preview and colours in-terminal. Has both true-colour and ASCII support.</p>
                     <div class="skills">
@@ -829,72 +846,28 @@
                         <span class="skill-tag">ricing</span>
                         <span class="skill-tag">*nix</span>
                     </div>
-                    <a href="https://github.com/z3nxth/colourpeek" class="card-link">View Project</a>
-                </div>
+                </a>
 
-                <div class="card">
+                <div class="card" style="cursor: default; opacity: 0.7;">
                     <h3>Dual-band WiFi deauther with the ESP32-C5</h3>
                     <p>I am currently designing a portable WiFi deauther built on the C5, which now supports 5GHz. I plan to both release the schematics and sell it.</p>
                     <div class="skills">
                         <span class="skill-tag">In Progress</span>
                         <span class="skill-tag">hardware</span>
                     </div>
-                    <a href="https://nalayn-pcb-pin-badge-2lzy28o.gamma.site/" class="card-link">View Project</a>
                 </div>
 
-                <div class="card">
+                <a href="https://nalayn-pcb-pin-badge-2lzy28o.gamma.site/" class="card">
                     <h3>Custom PCB Brooches</h3>
                     <p>My modern take on the Na'layn is a printed circuit board that uses a low-power LED light to give the badge a warm glow, blending modern tech seamlessly with sacred symbols.</p>
                     <div class="skills">
                         <span class="skill-tag">circuitry</span>
                         <span class="skill-tag">hardware</span>
                     </div>
-                    <a href="https://nalayn-pcb-pin-badge-2lzy28o.gamma.site/" class="card-link">View Project</a>
-                </div>
-
-                
-
-                
-                
+                </a>
             </div>
         </div>
     </section>
-
-    
-    <!-- 
-    <section id="achievements">
-        <div class="container">
-            <h2 class="section-title">Projects and Achievments</h2>
-            <div class="achievement-item">
-                <div class="achievement-year">2025</div>
-                <h3>PCB Badges</h3>
-                <p>Custom-designed badge-like wearable PCBs with religious symbolism.</p>
-                <p><a href="https://nalayn-pcb-pin-badge-2lzy28o.gamma.site/">See here</a></p>
-            </div>
-
-            <div class="achievement-item">
-                <div class="achievement-year">2024</div>
-                <h3>Work Experience</h3>
-                <p>Work Experience with a startup company configuring SQL Databases and linking them to custom forms.</p>
-            </div>
-            <div class="achievement-item">
-                <div class="achievement-year">2023</div>
-                <h3>Custom website for a local NGO Scout Group</h3>
-                <p>Designed a webpage for a non-profit local Scouting group.</p>
-            </div>
-            <div class="achievement-item">
-                <div class="achievement-year">2023</div>
-                <h3>CVE Discoveries</h3>
-                <p>Credited with discovering 5 CVEs in enterprise software, including RCE vulnerabilities in Fortune 500 applications.</p>
-            </div>
-            <div class="achievement-item">
-                <div class="achievement-year">2022</div>
-                <h3>Security Research Publication</h3>
-                <p>Published research on novel attack vectors in containerized environments at IEEE Security & Privacy Symposium.</p>
-            </div>
-        </div>
-    </section>
-    -- >
 
     <!-- Contact Section -->
     <section id="contact">
@@ -907,7 +880,7 @@
                     <a href="mailto:iftekharsyed@proton.me">iftekharsyed@proton.me</a>
                 </div>
                 <div class="contact-item">
-                    <div class="contact-icon">🔧</div>
+                    <div class="contact-icon">📧</div>
                     <h3>GitHub</h3>
                     <a href="https://github.com/z3nxth">github.com/z3nxth</a>
                 </div>
@@ -1063,5 +1036,3 @@
         `;
         document.head.appendChild(style);
     </script>
-</body>
-</html>
