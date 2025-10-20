@@ -1,1 +1,1056 @@
-<h1>Imran Afzal STINKS</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iftekhar Syed</title>
+    <meta property="og:title" content="Iftekhar Syed | Cybersecurity Researcher & Pentester">
+    <meta property="og:description" content="Hardware & software penetration tester passionate about RF exploitation, HackRF, and ethical hacking.">
+    <meta property="og:image" content="https://iftekhar.rocks/preview.png">
+    <meta property="og:url" content="https://iftekhar.rocks/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:title" content="Iftekhar Syed">
+    <meta name="twitter:description" content="Hardware/Software Penetration Tester | OSCP journey | z3nxth">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@latest/index.css">
+    <style>
+        @import url('-apple-system-font');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000000;
+            --secondary: #1a1a1a;
+            --accent: #ffffff;
+            --text: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --success: #ffffff;
+            --warning: #888888;
+            --card-bg: rgba(26, 26, 26, 0.8);
+            --border: rgba(255, 255, 255, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Professional background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 30px 0;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Maple Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: '>';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Maple Mono', monospace;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 60px 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-family: 'Maple Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+        }
+
+        .terminal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.05);
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #888888; }
+        .terminal-dot.yellow { background: #aaaaaa; }
+        .terminal-dot.green { background: #ffffff; }
+
+        .terminal-content {
+            font-family: 'Maple Mono', monospace;
+            color: var(--success);
+            line-height: 1.6;
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end);
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            letter-spacing: -0.01em;
+        }
+
+        .section-title::before {
+            content: '';
+            color: var(--accent);
+        }
+
+        .section-title::after {
+            content: '';
+            color: var(--accent);
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+            border-radius: 10px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Achievements */
+        .achievement-item {
+            background: var(--card-bg);
+            border-left: 3px solid var(--accent);
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(10px);
+            border-left-color: var(--success);
+        }
+
+        .achievement-year {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-family: 'Maple Mono', monospace;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .contact-item h3 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        /* Skills Tags */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-tag {
+            font-family: 'Maple Mono', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Scroll Down Arrow Indicator */
+        .scroll-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+            transform: translateY(-50%) translateX(50px);
+        }
+
+        .scroll-text {
+            font-family: 'Maple Mono', monospace;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .scroll-arrow {
+            width: 2px;
+            height: 40px;
+            background: var(--accent);
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .scroll-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 8px solid var(--accent);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-3px);
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: var(--accent);
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border);
+            padding: 100px 30px 30px;
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .mobile-menu-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid transparent;
+            font-weight: 500;
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+            }
+            
+            .nav-links {
+                display: none !important;
+            }
+
+            .mobile-menu-btn {
+                display: flex !important;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scroll-indicator {
+                display: none !important;
+            }
+
+            /* Mobile scroll hint - ensure it shows */
+            .mobile-scroll-hint {
+                display: flex !important;
+                position: fixed;
+                bottom: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1000;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                opacity: 0.8;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                background: rgba(0, 0, 0, 0.3);
+                padding: 10px 15px;
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+            }
+
+            .mobile-scroll-hint.hidden {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            .mobile-scroll-text {
+                font-family: 'Maple Mono', monospace;
+                color: var(--accent);
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                font-weight: 500;
+            }
+
+            .mobile-scroll-arrow {
+                width: 16px;
+                height: 16px;
+                border-right: 2px solid var(--accent);
+                border-bottom: 2px solid var(--accent);
+                transform: rotate(45deg);
+                animation: mobileBounce 2s infinite;
+            }
+
+            @keyframes mobileBounce {
+                0%, 20%, 50%, 80%, 100% {
+                    transform: rotate(45deg) translateY(0);
+                }
+                40% {
+                    transform: rotate(45deg) translateY(-3px);
+                }
+                60% {
+                    transform: rotate(45deg) translateY(-1px);
+                }
+            }
+
+            .scroll-text {
+                font-size: 0.7rem;
+            }
+
+            nav .container {
+                position: relative;
+            }
+
+            .terminal {
+                margin: 20px auto;
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            .hero {
+                padding: 40px 0;
+                min-height: 85vh;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        /* Larger mobile devices */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .terminal {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Remove original custom scrollbar */
+        ::-webkit-scrollbar { display: none; }
+
+        /* Restore animations and particles */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Down Indicator (Desktop) -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <span class="scroll-text">SCROLL DOWN</span>
+        <div class="scroll-arrow"></div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-links">
+            <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="/blog" onclick="closeMobileMenu()">Blog</a></li>
+            <li><a href="#writeups" onclick="closeMobileMenu()">Writeups</a></li>
+            <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
+            <!-- <li><a href="#achievements" onclick="closeMobileMenu()">Achievements</a></li> -->
+            <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">IS</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="#writeups">Writeups</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <!-- <li><a href="#achievements">Achievements</a></li> -->
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <!-- Mobile Menu Button -->
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Iftekhar Syed</h1>
+                <p class="subtitle">HARDWARE/SOFTWARE PENETRATION TESTER</p>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                    </div>
+                    <div class="terminal-content">
+                        <p class="typing"><b><i>[iftekhar]> </b></i>whoami</p><br>
+                        <p>hey! i'm Iftekhar (or z3nxth), an aspiring redteamer interested in pentesting and hardware hacking. I am currently working on my OSCP.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Writeups Section -->
+    <section id="writeups">
+        <div class="container">
+            <h2 class="section-title">CTFs & Writeups</h2>
+            <div class="grid">
+
+                <a href="/blog/posts/HTB-Chemistry-Writeup/" class="card">
+                    <h3>Writeup: HTB Chemistry</h3>
+                    <p>Chemistry is an easy linux box on HackTheBox which begins with gaining code execution through Insecure File Upload. We gain access to a more privileged user through a hashed database. After, internally ran webpages lead to root!</p>
+                    <div class="skills">
+                        <br>
+                        <span class="skill-tag">HTB</span>
+                        <span class="skill-tag">CTF</span>
+                        <span class="skill-tag">Software\Linux</span>
+                    </div>
+                </a>
+                
+                <a href="/blog/posts/systemctl-SUID-bit-exploitation/" class="card">
+                    <h3>Exploiting SUID Bits: systemctl</h3>
+                    <p>A SUID bit allows a binary to run with the permissions of the owner of the file. If root made the file, the file runs as root. Consequently, misconfigured SUID binaries can lead to code execution and even root access. </p>
+                    <div class="skills">
+                        <br>
+                        <span class="skill-tag">Privesc</span>
+                        <span class="skill-tag">CTF</span>
+                        <span class="skill-tag">Software\Linux</span>
+                    </div>
+                </a>
+
+                <a href="/blog/posts/CFW-TMBCC1101-installation/" class="card">
+                    <h3>Installing custom firmware on the T-Embed CC1101</h3>
+                    <p>An installation guide for using Bruce on the T-Embed CC1101. This is a custom firmware that truly unlocks the capabilities of the TMB, maybe even turning it into a Flipper Zero killer with built-in WiFi?</p>
+                    <div class="skills">
+                        <br>
+                        <span class="skill-tag">Hardware</span>
+                        <span class="skill-tag">Pentesting</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="grid">
+                
+                <a href="https://github.com/z3nxth/colourpeek" class="card">
+                    <h3>Colourpeek</h3>
+                    <p>An amazing tool to grab a colour palette from an image. Shows image preview and colours in-terminal. Has both true-colour and ASCII support.</p>
+                    <div class="skills">
+                        <span class="skill-tag">python</span>
+                        <span class="skill-tag">ricing</span>
+                        <span class="skill-tag">*nix</span>
+                    </div>
+                </a>
+
+                <div class="card" style="cursor: default; opacity: 0.7;">
+                    <h3>Dual-band WiFi deauther with the ESP32-C5</h3>
+                    <p>I am currently designing a portable WiFi deauther built on the C5, which now supports 5GHz. I plan to both release the schematics and sell it.</p>
+                    <div class="skills">
+                        <span class="skill-tag">In Progress</span>
+                        <span class="skill-tag">hardware</span>
+                    </div>
+                </div>
+
+                <a href="https://nalayn-pcb-pin-badge-2lzy28o.gamma.site/" class="card">
+                    <h3>Custom PCB Brooches</h3>
+                    <p>My modern take on the Na'layn is a printed circuit board that uses a low-power LED light to give the badge a warm glow, blending modern tech seamlessly with sacred symbols.</p>
+                    <div class="skills">
+                        <span class="skill-tag">circuitry</span>
+                        <span class="skill-tag">hardware</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <a href="mailto:iftekharsyed@proton.me">iftekharsyed@proton.me</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/z3nxth">github.com/z3nxth</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; made by Iftekhar Syed in the big 25 all rights reserved or sm like that</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create mobile scroll hint only on mobile
+        function createMobileScrollHint() {
+            if (window.innerWidth <= 768) {
+                if (!document.getElementById('mobileScrollHint')) {
+                    const mobileHint = document.createElement('div');
+                    mobileHint.id = 'mobileScrollHint';
+                    mobileHint.className = 'mobile-scroll-hint';
+                    mobileHint.innerHTML = `
+                        <span class="mobile-scroll-text">Scroll</span>
+                        <div class="mobile-scroll-arrow"></div>
+                    `;
+                    document.body.appendChild(mobileHint);
+                }
+            } else {
+                const existingHint = document.getElementById('mobileScrollHint');
+                if (existingHint) {
+                    existingHint.remove();
+                }
+            }
+        }
+
+        // Create mobile hint on load and resize
+        createMobileScrollHint();
+        window.addEventListener('resize', createMobileScrollHint);
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+        function toggleMobileMenu() {
+            mobileMenuBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        function closeMobileMenu() {
+            mobileMenuBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Add smooth reveal animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and achievement items
+        document.querySelectorAll('.card, .achievement-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Terminal typing effect enhancement
+        const terminalLines = document.querySelectorAll('.terminal-content p');
+        terminalLines.forEach((line, index) => {
+            line.style.opacity = '0';
+            setTimeout(() => {
+                line.style.opacity = '1';
+                line.style.animation = 'fadeInUp 0.5s ease';
+            }, index * 500);
+        });
+
+        // Professional background particles (bigger white dots, less frequent)
+        const createParticle = () => {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(255, 255, 255, 0.5)';
+            particle.style.pointerEvents = 'none';
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = '-10px';
+            particle.style.zIndex = '0';
+            document.body.appendChild(particle);
+
+            const duration = Math.random() * 8 + 5;
+            particle.style.animation = `fall ${duration}s linear`;
+
+            setTimeout(() => particle.remove(), duration * 1000);
+        };
+
+        // Create particles less frequently
+        setInterval(createParticle, 800);
+
+        // Scroll indicators functionality
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        const mobileScrollHint = document.getElementById('mobileScrollHint');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            // Hide the indicators after scrolling past the first section
+            if (scrollTop > windowHeight * 0.3) {
+                scrollIndicator.classList.add('hidden');
+                if (mobileScrollHint) mobileScrollHint.classList.add('hidden');
+            } else {
+                scrollIndicator.classList.remove('hidden');
+                if (mobileScrollHint) mobileScrollHint.classList.remove('hidden');
+            }
+        });
+
+        // Add CSS animation for particles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(180deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
