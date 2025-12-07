@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>110010100</title>
+  <title>404 — not found</title>
   <link rel="icon" type="image/x-icon" href="profile.png" />
+
   <style>
     :root{
       --bg: #0c0c0c;
@@ -21,8 +22,9 @@
       font-family:var(--mono);
       margin:0;
       padding:0;
-      -webkit-font-smoothing:antialiased;
       height:100%;
+      overflow:hidden;
+      -webkit-font-smoothing:antialiased;
     }
 
     body{
@@ -32,33 +34,21 @@
       justify-content:center;
       text-align:center;
       padding:20px;
+      animation:vhs 4s infinite steps(1);
     }
 
     h1{
       font-size:3rem;
       color:var(--accent-2);
       margin:0 0 14px;
+      position:relative;
+      animation:glitch 2.7s infinite;
     }
 
     p{
       color:var(--p);
       font-size:1.05rem;
       margin:0 0 28px;
-    }
-
-    a{
-      color:var(--accent);
-      font-weight:600;
-      text-decoration:none;
-    }
-    a:hover{color:var(--accent-2);text-decoration:underline;}
-
-    .scanline{
-      width:100%;
-      height:1px;
-      background:var(--muted-line);
-      margin:24px 0;
-      opacity:0.4;
     }
 
     button.cta{
@@ -73,17 +63,69 @@
     button.cta:hover{
       background:#7cff8a22;
     }
+
+
+    body::before{
+      content:"";
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.03) 0px,
+          rgba(255,255,255,0.03) 1px,
+          transparent 1px,
+          transparent 2px
+        );
+      opacity:0.2;
+      mix-blend-mode:overlay;
+      animation:noise 0.9s infinite;
+    }
+
+    @keyframes glitch {
+      0%, 100% { text-shadow:none; transform:none; }
+      7% { text-shadow:2px 0 var(--accent); }
+      14% { text-shadow:-2px 0 var(--accent-2); }
+      21% { transform:translate(1px,0); }
+      30% { transform:translate(-1px,0); }
+      40% { text-shadow:none; }
+    }
+
+
+    @keyframes vhs {
+      0%, 100% { opacity:1; }
+      50% { opacity:0.97; }
+      75% { opacity:0.94; }
+    }
+
+    @keyframes noise {
+      0% {opacity:0.12;}
+      50% {opacity:0.18;}
+      100% {opacity:0.12;}
+    }
+
+    .scanline{
+      width:100%;
+      height:1px;
+      background:var(--muted-line);
+      margin:24px 0;
+      opacity:0.4;
+    }
   </style>
 </head>
 
 <body>
-  <h1>&gt; 404</h1>
-  <p>page does not exist or was not found</p>
 
-  <button class="cta" onclick="location.href='/'">take me home</button>
+  <h1>&gt; 404</h1>
+  <p>page not found / does not exist.</p>
+
+  <button class="cta" onclick="location.href='/'">back to home</button>
 
   <div class="scanline"></div>
 
-  <p style="opacity:0.5;">z3nxth / iftekhar syed</p>
+  <p style="opacity:0.4;">z3nxth</p>
+
 </body>
 </html>
