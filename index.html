@@ -188,23 +188,40 @@
 
   </div>
 
-  <script>
-    (function(){
-      const divider = document.getElementById('expandDivider');
-      const extra = document.getElementById('extra-writeups');
+<script>
+(function(){
+  const divider = document.getElementById('expandDivider');
+  const extra = document.getElementById('extra-writeups');
+  let isOpen = false;
 
-      function setOpen(open){
-        if(open){
-          extra.classList.add('open');
-          extra.setAttribute('aria-hidden','false');
-          divider.classList.add('open');
-          divider.setAttribute('aria-expanded','true');
-        } else {
-          extra.classList.remove('open');
-          extra.setAttribute('aria-hidden','true');
-          divider.classList.remove('open');
-          divider.setAttribute('aria-expanded','false');
-        }
-      }
+  function setOpen(open){
+    if(open){
+      extra.classList.add('open');
+      extra.setAttribute('aria-hidden','false');
+      divider.classList.add('open');
+      divider.setAttribute('aria-expanded','true');
+    } else {
+      extra.classList.remove('open');
+      extra.setAttribute('aria-hidden','true');
+      divider.classList.remove('open');
+      divider.setAttribute('aria-expanded','false');
+    }
+  }
 
+  // Toggle on click
+  divider.addEventListener('click', () => {
+    isOpen = !isOpen;
+    setOpen(isOpen);
+  });
 
+  // Toggle on keyboard (Enter / Space)
+  divider.addEventListener('keydown', (e) => {
+    if(e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      isOpen = !isOpen;
+      setOpen(isOpen);
+    }
+  });
+
+})();
+</script>
