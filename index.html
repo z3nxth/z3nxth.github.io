@@ -170,13 +170,13 @@
       <div class="wu">
         <h4>htb chemistry</h4>
         <a href="https://iftekhar.rocks/blog/posts/HTB-Chemistry-Writeup/">link</a>
-        <p>chemistry is an easy linux box. after gaining a shell through insecure file upload, we can crack internal hashed credentials found in a sqldb and pivot into a user shell. we can then privesc to root by exploiting an internal webpage's path traversal/file inclusion vuln to get an ssh key for root.</p>
+        <p>chemistry is an easy linux box. after gaining a shell through insecure file upload, we can crack internal hashed credentials found in a sql database and laterally move into a user shell. we can then privilege escalate to root by exploiting an internal webpage's path traversal/file inclusion vulnerability to get an ssh key for root.</p>
       </div>
 
       <div class="wu">
         <h4>exploiting suid bits: systemctl</h4>
         <a href="https://iftekhar.rocks/blog/posts/systemctl-SUID-bit-exploitation/">link</a>
-        <p>exploring how binaries with suid bits run with the permissions of their owner. therefore, root-owned binaries can be ran as root. in this case, we exploited the suid bit for systemctl to run arbitrary root commands by getting a shell.</p>
+        <p>this is a post on SUID bits. SUID bit binaries run with the permissions of their owner. consequently, root-owned binaries can be ran as root. in this case, we exploited the suid bit for systemctl to run arbitrary root commands by getting a shell.</p>
       </div>
     </div>
 
