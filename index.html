@@ -17,9 +17,6 @@
   <meta name="twitter:description" content="ctfs · writeups · hardware hacking · road to oscp" />
   <meta name="twitter:image" content="profile.png" />
 
-
-
-  
   <style>
     :root{
       --bg: #0c0c0c;
@@ -45,9 +42,6 @@
     h4{color:#96ffb0;font-size:1.05rem;margin-top:28px;margin-bottom:4px;text-transform:lowercase;}
     p{color:var(--p);margin:6px 0 28px;}
 
-
-
-    
     a{color:var(--accent-2);font-weight:600;text-decoration:none}
     a:hover{text-decoration:underline;color:#b8ffcb}
 
@@ -59,6 +53,39 @@
     hr{border:0;border-top:1px solid #222;margin:26px 0}
 
     .section{margin-bottom:40px}
+
+    /* about section */
+    .about-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 32px;
+      margin-top: 12px;
+    }
+    .about-grid p{
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--p);
+    }
+    .about-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+    .tag{
+      font-size:0.78rem;
+      padding:3px 10px;
+      border:1px solid #2a5c33;
+      border-radius:4px;
+      color:#7cffaa;
+      background:#0d1f11;
+      letter-spacing:0.03em;
+    }
+
+    @media(max-width:540px){
+      .about-grid{grid-template-columns:1fr;}
+    }
 
     #extra-writeups{
       overflow:hidden;
@@ -84,15 +111,12 @@
       outline:none !important;
     }
 
-
-    
     .expand-divider .line{
       flex:1;
       height:1px;
       background:var(--muted-line);
     }
 
-    /* Perfectly centred arrow */
     .expand-divider .arrow{
       display:inline-flex;
       align-items:center;
@@ -104,12 +128,11 @@
       color:var(--accent);
       border:1px solid rgba(90,223,114,0.12);
       transition:transform 260ms ease, background 200ms;
-      transform: rotate(0deg); /* base */
+      transform: rotate(0deg);
     }
 
     .expand-divider:hover .arrow{background:rgba(90,223,114,0.04);}
 
-    /* rotation only — arrow stays ▼ always */
     .expand-divider.open .arrow{
       transform: rotate(180deg);
     }
@@ -141,10 +164,30 @@
 
   <hr />
 
+  <div class="section">
+    <h2>&gt; about me</h2>
+    <div class="about-grid">
+      <p>
+        i'm a student interested in offensive security and physical pentesting. currently, I am studying for
+        the oscp while learning about av/edr evasion, cryptography and doing ctfs in my space time.
+      </p>
+      <p>
+        my other interests include jiu-jitsu, islamic philosophy and poetry, logic, lockpicking and air rifle shooting.
+        this site is where i share notes, writeups, and things i wish i'd found sooner.
+      </p>
+    </div>
+    <div class="about-tags">
+      <span class="tag">red team</span>
+      <span class="tag">active directory</span>
+      <span class="tag">ctf</span>
+      <span class="tag">hardware hacking</span>
+      <span class="tag">c2 / maldev</span>
+      <span class="tag">oscp in progress</span>
+    </div>
+  </div>
 
+  <hr />
 
-
-  
   <div class="section">
     <h2>&gt; recent writeups</h2>
 
@@ -159,7 +202,7 @@
       <div class="wu">
         <h4>understanding SMB relay attacks</h4>
         <a href="https://iftekhar.rocks/blog/posts/SMB-Relay-Attacks/">link</a>
-        <p>This guide covers SMB relay attacks. In many AD environments, cracking passwords isn’t feasible - however, when SMB signing is not enforced (the default in many setups), an attacker can abuse trust to relay NTLM authentication and gain access without ever knowing the plaintext password.</p>
+        <p>This guide covers SMB relay attacks. In many AD environments, cracking passwords isn't feasible - however, when SMB signing is not enforced (the default in many setups), an attacker can abuse trust to relay NTLM authentication and gain access without ever knowing the plaintext password.</p>
       </div>
       
       <div class="wu">
@@ -222,10 +265,6 @@ A stager is a small piece of software that has only one primary task: to trigger
       </div>
     </div>
 
-
-
-
-    
   </div>
 
   <hr />
@@ -233,7 +272,6 @@ A stager is a small piece of software that has only one primary task: to trigger
   <div class="section">
     <h2>&gt; contact</h2>
     <a href="mailto:iftekharsyed@proton.me">send me an email</a><br>
-
   </div>
 
 <script>
@@ -261,10 +299,6 @@ A stager is a small piece of software that has only one primary task: to trigger
     setOpen(isOpen);
   });
 
-
-
-
-  
   divider.addEventListener('keydown', (e) => {
     if(e.key === "Enter" || e.key === " "){
       e.preventDefault();
@@ -274,4 +308,5 @@ A stager is a small piece of software that has only one primary task: to trigger
   });
 
 })();
-</script>
+</script></body>
+</html>
