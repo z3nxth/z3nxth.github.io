@@ -11,212 +11,199 @@
   <meta property="og:image" content="profile.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://iftekhar.rocks" />
-  
+
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Iftekhar Syed (z3nxth)" />
   <meta name="twitter:description" content="ctfs · writeups · hardware hacking · road to oscp" />
   <meta name="twitter:image" content="profile.png" />
 
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
   <style>
-    /* SF Mono Nerd Font via jsDelivr */
     @font-face {
-      font-family: "SF Mono Nerd";
-      src: url("https://cdn.jsdelivr.net/gh/epk/SF-Mono-Nerd-Font@main/SFMonoNerdFont-Regular.ttf") format("truetype");
+      font-family: 'SFMono Nerd Font';
+      src: url('https://github.com/epk/SF-Mono-Nerd-Font/raw/master/SFMonoNerdFont-Regular.otf') format('opentype');
       font-weight: 400;
       font-style: normal;
-      font-display: swap;
     }
-
     @font-face {
-      font-family: "SF Mono Nerd";
-      src: url("https://cdn.jsdelivr.net/gh/epk/SF-Mono-Nerd-Font@main/SFMonoNerdFont-Bold.ttf") format("truetype");
+      font-family: 'SFMono Nerd Font';
+      src: url('https://github.com/epk/SF-Mono-Nerd-Font/raw/master/SFMonoNerdFont-Medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SFMono Nerd Font';
+      src: url('https://github.com/epk/SF-Mono-Nerd-Font/raw/master/SFMonoNerdFont-Bold.otf') format('opentype');
       font-weight: 700;
       font-style: normal;
-      font-display: swap;
     }
 
-    @font-face {
-      font-family: "SF Mono Nerd";
-      src: url("https://cdn.jsdelivr.net/gh/epk/SF-Mono-Nerd-Font@main/SFMonoNerdFont-Italic.ttf") format("truetype");
-      font-weight: 400;
-      font-style: italic;
-      font-display: swap;
+    :root {
+      --bg:       #1e1e1e;
+      --muted-line: #2a2a2a;
+      --text:     #ffffff;
+      --muted:    #888888;
+      --mono:     'SFMono Nerd Font', 'SF Mono', 'JetBrains Mono', monospace;
     }
 
-    :root{
-      --bg: #0c0c0c;
-      --muted-line: #333;
-      --accent: #5adf72;
-      --accent-2: #7cff8a;
-      --text: #d0f0d0;
-      --p: #c8e9c8;
-      --mono: "SF Mono Nerd", "JetBrains Mono", monospace;
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
     }
 
-    html,body{
-      background:var(--bg);
-      color:var(--text);
-      font-family:var(--mono);
-      margin:0;
-      padding:0;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    body{
+    body {
       margin: 40px auto;
       max-width: 750px;
       line-height: 1.6;
       padding: 0 20px;
-      letter-spacing: -0.01em;
     }
 
-    h1{
-      color:var(--accent-2);
-      font-size:2rem;
-      margin-bottom:14px;
-      letter-spacing: -0.025em;
+    h1 {
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
 
-    h2{
-      color:var(--accent);
-      font-size:1.4rem;
-      margin-top:28px;
-      text-transform:lowercase;
-      border-left:3px solid var(--accent);
-      padding-left:8px;
-      letter-spacing: -0.02em;
+    h2 {
+      color: #ffffff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-top: 28px;
+      text-transform: lowercase;
+      border-left: 3px solid #ffffff;
+      padding-left: 8px;
     }
 
-    h4{
-      color:#96ffb0;
-      font-size:1.05rem;
-      margin-top:28px;
-      margin-bottom:4px;
-      text-transform:lowercase;
-      letter-spacing: -0.015em;
+    h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-top: 28px;
+      margin-bottom: 4px;
+      text-transform: lowercase;
     }
 
-    p{
-      color:var(--p);
-      margin:6px 0 28px;
+    h4 a {
+      color: #ffffff;
+      text-decoration: none;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      text-decoration-color: #444;
+      text-decoration-line: underline;
+    }
+    h4 a:hover {
+      text-decoration-style: solid;
+      text-decoration-color: #ffffff;
     }
 
-    a{
-      color:var(--accent-2);
-      font-weight:600;
-      text-decoration:none
+    p { color: var(--muted); margin: 6px 0 28px; }
+
+    a { color: var(--text); font-weight: 600; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    button.cta {
+      background: transparent;
+      border: 1px solid #333;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 8px;
+      color: var(--text);
+      font-weight: 600;
+      font-family: var(--mono);
+      font-size: 0.9rem;
     }
+    button.cta:hover { background: #262626; border-color: #555; }
 
-    a:hover{
-      text-decoration:underline;
-      color:#b8ffcb
-    }
+    hr { border: 0; border-top: 1px solid var(--muted-line); margin: 26px 0; }
 
-    button.cta{
-      background:transparent;
-      border:1px solid var(--accent-2);
-      padding:8px 12px;
-      border-radius:6px;
-      cursor:pointer;
-      margin-top:8px;
-      color:var(--accent-2);
-      font-weight:600;
-      letter-spacing:-0.01em;
-    }
+    .section { margin-bottom: 40px; }
 
-    button.cta:hover{
-      background:#7cff8a22
-    }
-
-    hr{
-      border:0;
-      border-top:1px solid #222;
-      margin:26px 0
-    }
-
-    .section{margin-bottom:40px}
-
-    .about-grid{
-      display:grid;
+    /* about */
+    .about-grid {
+      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0 32px;
       margin-top: 12px;
     }
-
-    .about-grid p{
+    .about-grid p {
       margin: 0;
       font-size: 0.92rem;
       line-height: 1.75;
-      color: var(--p);
+      color: var(--muted);
     }
 
-    @media(max-width:540px){
-      .about-grid{grid-template-columns:1fr;}
+    @media (max-width: 540px) {
+      .about-grid { grid-template-columns: 1fr; }
     }
 
-    #extra-writeups{
-      overflow:hidden;
-      max-height:0;
-      transition:max-height 360ms cubic-bezier(.2,.9,.2,1);
-      will-change:max-height;
+    /* expand */
+    #extra-writeups {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 360ms cubic-bezier(.2,.9,.2,1);
+      will-change: max-height;
     }
+    #extra-writeups.open { max-height: 1200px; }
 
-    #extra-writeups.open{ max-height:1200px; }
-
-    .expand-divider{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin:28px 0;
-      cursor:pointer;
-      user-select:none;
-      justify-content:center;
+    .expand-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0;
+      cursor: pointer;
+      user-select: none;
+      justify-content: center;
       -webkit-tap-highlight-color: transparent;
     }
+    .expand-divider:focus,
+    .expand-divider:focus-visible { outline: none !important; }
 
-    .expand-divider .line{
-      flex:1;
-      height:1px;
-      background:var(--muted-line);
+    .expand-divider .line {
+      flex: 1;
+      height: 1px;
+      background: var(--muted-line);
     }
 
-    .expand-divider .arrow{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      font-size:18px;
-      color:var(--accent);
-      border:1px solid rgba(90,223,114,0.12);
-      transition:transform 260ms ease, background 200ms;
+    .expand-divider .arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 18px;
+      color: #555;
+      border: 1px solid #2e2e2e;
+      transition: transform 260ms ease, background 200ms, color 200ms;
       transform: rotate(0deg);
     }
+    .expand-divider:hover .arrow { background: #252525; color: #888; }
+    .expand-divider.open .arrow { transform: rotate(180deg); }
 
-    .expand-divider:hover .arrow{
-      background:rgba(90,223,114,0.04);
+    .expand-divider-wrapper { padding: 8px 0; display: block; }
+
+    @media (max-width: 600px) {
+      body { margin: 20px auto; max-width: 92%; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.15rem; }
+      .expand-divider .arrow { width: 44px; height: 44px; font-size: 19px; }
     }
 
-    .expand-divider.open .arrow{
-      transform: rotate(180deg);
+    details, details *, summary, summary:focus, summary:active {
+      outline: none !important;
+      box-shadow: none !important;
     }
-
-    @media (max-width:600px){
-      body{margin:20px auto;max-width:92%}
-      h1{font-size:1.6rem}
-      h2{font-size:1.15rem}
-      .expand-divider .arrow{width:44px;height:44px;font-size:19px}
-    }
+    summary::-webkit-details-marker { display: none !important; }
   </style>
 </head>
 
 <body>
 
-  <h1>&gt; iftekhar syed / z3nxth</h1>
+  <h1>&gt; <span id="glitch-name">iftekhar syed / z3nxth</span></h1>
   <p>ctfs, writeups, hardware hacking, road to oscp</p>
   <button class="cta" onclick="location.href='https://iftekhar.rocks/blog'">see blog</button>
 
@@ -227,13 +214,86 @@
     <div class="about-grid">
       <p>
         i'm a student interested in offensive security and physical pentesting. currently, I am studying for
-        the oscp while learning about av/edr evasion, cryptography and doing ctfs in my space time.
+        the oscp while learning about av/edr evasion, cryptography and doing ctfs in my spare time.
       </p>
       <p>
-        my other interests include jiu-jitsu, islamic philosophy and poetry, logic, lockpicking, balisong (trainer) flipping 
+        my other interests include jiu-jitsu, islamic philosophy and poetry, logic, lockpicking, balisong (trainer) flipping
         and air rifle shooting. this site is where i share writeups and notes.
       </p>
     </div>
+  </div>
+
+  <hr />
+
+  <div class="section">
+    <h2>&gt; recent writeups</h2>
+
+    <div id="writeups">
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/XOR-Obfuscation/">XOR OBFUSCATION</a></h4>
+        <p>XOR obfuscation is a bare-bones and lightweight method of obfuscating data using the bitwise XOR operation. Data is combined with a key to get a result. "XORing" is useful for evasion of basic static detection in some cases and is easy to implement in shellcode.</p>
+      </div>
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/SMB-Relay-Attacks/">UNDERSTANDING SMB RELAY ATTACKS</a></h4>
+        <p>This guide covers SMB relay attacks. In many AD environments, cracking passwords isn't feasible — however, when SMB signing is not enforced (the default in many setups), an attacker can abuse trust to relay NTLM authentication and gain access without ever knowing the plaintext password.</p>
+      </div>
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/Using-Stagers-with-sliver/">SLIVERc2: STAGERS</a></h4>
+        <p>A stager is a small piece of software that has only one primary task: to trigger a larger implant's download and make the initial connection between host and C2. Stagers are small, lightweight and can help in AV evasion where they can potentially run in-memory.</p>
+      </div>
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/HTB-Active-Writeup/">HTB ACTIVE</a></h4>
+        <p>Active is an easy Windows box where we find encrypted credentials in an unsecured SMB share. We can decrypt credentials with a publicly available key to get domain user and perform a kerberoasting attack against the svc_tgs account to get domain admin.</p>
+      </div>
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/Understanding-LLMNR-Poisoning/">UNDERSTANDING LLMNR POISONING</a></h4>
+        <p>This is a guide on LLMNR poisoning. When DNS fails, a fallback protocol is used named LLMNR/NBT-NS. Resource locations are requested from the whole network, and an attacker can respond in exchange for a victim's hashed credentials.</p>
+      </div>
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/Using-Sliver-On-Linux/">USING SLIVER ON LINUX</a></h4>
+        <p>Walkthrough of using sliverc2 against linux targets. Sliver is a modern CLI-based command and control (C2) framework that is extremely flexible, supporting beacons, stagers, mTLS/HTTP/DNS transport options and more!</p>
+      </div>
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/HTB-Chemistry-Writeup/">HTB CHEMISTRY</a></h4>
+        <p>Chemistry is an easy Linux box. After gaining a shell through insecure file upload, we can crack internal hashed credentials found in a SQL database and laterally move into a user shell. We can then privilege escalate to root by exploiting an internal webpage's path traversal/file inclusion vulnerability to get an SSH key for root.</p>
+      </div>
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/systemctl-SUID-bit-exploitation/">EXPLOITING SUID: /usr/bin/systemctl</a></h4>
+        <p>This is a post on SUID bits. SUID binaries run with the permissions of their owner. Consequently, root-owned binaries can be ran as root. In this post, we exploited the SUID bit for systemctl to run arbitrary root commands by getting a shell.</p>
+      </div>
+
+    </div>
+
+    <div class="expand-divider-wrapper">
+      <div id="expandDivider" class="expand-divider" tabindex="0" role="button" aria-expanded="false">
+        <span class="line"></span>
+        <span class="arrow" aria-hidden="true">▼</span>
+        <span class="line"></span>
+      </div>
+    </div>
+
+    <div id="extra-writeups" aria-hidden="true">
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/Rooting-a-S20FE-with-Magisk/">ROOTING WITH MAGISK</a></h4>
+        <p>In this guide, we sideload Magisk on the S20FE to root it. Rooting a device gains elevated privileges on otherwise comparatively more restricted devices.</p>
+      </div>
+
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/CFW-TMBCC1101-installation">INSTALLING CFW ON TMBCC1101</a></h4>
+        <p>The LilyGo T-Embed CC1101 is a pocket-sized dev board with built-in sub-GHz, IR, NFC/RFID, BLE, WiFi, BadUSB and more. It runs on an ESP32-S3. Using BruceFW takes full advantage of these capabilities and turns the TMB into a pocket pentesting device.</p>
+      </div>
+
+    </div>
+
   </div>
 
   <hr />
@@ -244,5 +304,74 @@
     <a href="https://github.com/epk/SF-Mono-Nerd-Font">font used</a><br>
   </div>
 
+<script>
+// ── character scramble effect ──
+(function(){
+  const el     = document.getElementById('glitch-name');
+  const target = 'iftekhar syed / z3nxth';
+  const chars  = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%&*-_=+[]{}|;:<>?/';
+  const DELAY  = 18;
+  const HOLD   = 2; // frames before resolving next char
+
+  let frame    = 0;
+  let resolved = 0;
+
+  function rand() { return chars[Math.floor(Math.random() * chars.length)]; }
+
+  function tick() {
+    let out = '';
+    for (let i = 0; i < target.length; i++) {
+      if (i < resolved || target[i] === ' ' || target[i] === '/') {
+        out += target[i];
+      } else {
+        out += rand();
+      }
+    }
+    el.textContent = out;
+
+    frame++;
+    if (frame % HOLD === 0) {
+      while (resolved < target.length && (target[resolved] === ' ' || target[resolved] === '/')) {
+        resolved++;
+      }
+      resolved++;
+    }
+
+    if (resolved <= target.length) {
+      setTimeout(tick, DELAY);
+    } else {
+      el.textContent = target;
+    }
+  }
+
+  setTimeout(tick, 120);
+})();
+
+// ── expand divider ──
+(function(){
+  const divider = document.getElementById('expandDivider');
+  const extra   = document.getElementById('extra-writeups');
+  let isOpen = false;
+
+  function setOpen(open) {
+    if (open) {
+      extra.classList.add('open');
+      extra.setAttribute('aria-hidden', 'false');
+      divider.classList.add('open');
+      divider.setAttribute('aria-expanded', 'true');
+    } else {
+      extra.classList.remove('open');
+      extra.setAttribute('aria-hidden', 'true');
+      divider.classList.remove('open');
+      divider.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  divider.addEventListener('click', () => { isOpen = !isOpen; setOpen(isOpen); });
+  divider.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); isOpen = !isOpen; setOpen(isOpen); }
+  });
+})();
+</script>
 </body>
 </html>
