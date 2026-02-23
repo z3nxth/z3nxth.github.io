@@ -17,7 +17,34 @@
   <meta name="twitter:description" content="ctfs · writeups · hardware hacking · road to oscp" />
   <meta name="twitter:image" content="profile.png" />
 
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
   <style>
+    /* SF Mono Nerd Font via jsDelivr */
+    @font-face {
+      font-family: "SF Mono Nerd";
+      src: url("https://cdn.jsdelivr.net/gh/epk/SF-Mono-Nerd-Font@main/SFMonoNerdFont-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "SF Mono Nerd";
+      src: url("https://cdn.jsdelivr.net/gh/epk/SF-Mono-Nerd-Font@main/SFMonoNerdFont-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "SF Mono Nerd";
+      src: url("https://cdn.jsdelivr.net/gh/epk/SF-Mono-Nerd-Font@main/SFMonoNerdFont-Italic.ttf") format("truetype");
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+
     :root{
       --bg: #0c0c0c;
       --muted-line: #333;
@@ -25,62 +52,105 @@
       --accent-2: #7cff8a;
       --text: #d0f0d0;
       --p: #c8e9c8;
-      --mono: "JetBrains Mono", monospace;
+      --mono: "SF Mono Nerd", "JetBrains Mono", monospace;
     }
 
-    html,body{background:var(--bg);color:var(--text);font-family:var(--mono);margin:0;padding:0;}
+    html,body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--mono);
+      margin:0;
+      padding:0;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
     body{
       margin: 40px auto;
       max-width: 750px;
       line-height: 1.6;
       padding: 0 20px;
-      -webkit-font-smoothing:antialiased;
+      letter-spacing: -0.01em;
     }
 
-    h1{color:var(--accent-2);font-size:2rem;margin-bottom:14px;}
-    h2{color:var(--accent);font-size:1.4rem;margin-top:28px;text-transform:lowercase;border-left:3px solid var(--accent);padding-left:8px;}
-    h4{color:#96ffb0;font-size:1.05rem;margin-top:28px;margin-bottom:4px;text-transform:lowercase;}
-    p{color:var(--p);margin:6px 0 28px;}
+    h1{
+      color:var(--accent-2);
+      font-size:2rem;
+      margin-bottom:14px;
+      letter-spacing: -0.025em;
+    }
 
-    a{color:var(--accent-2);font-weight:600;text-decoration:none}
-    a:hover{text-decoration:underline;color:#b8ffcb}
+    h2{
+      color:var(--accent);
+      font-size:1.4rem;
+      margin-top:28px;
+      text-transform:lowercase;
+      border-left:3px solid var(--accent);
+      padding-left:8px;
+      letter-spacing: -0.02em;
+    }
+
+    h4{
+      color:#96ffb0;
+      font-size:1.05rem;
+      margin-top:28px;
+      margin-bottom:4px;
+      text-transform:lowercase;
+      letter-spacing: -0.015em;
+    }
+
+    p{
+      color:var(--p);
+      margin:6px 0 28px;
+    }
+
+    a{
+      color:var(--accent-2);
+      font-weight:600;
+      text-decoration:none
+    }
+
+    a:hover{
+      text-decoration:underline;
+      color:#b8ffcb
+    }
 
     button.cta{
-      background:transparent;border:1px solid var(--accent-2);padding:8px 12px;border-radius:6px;cursor:pointer;margin-top:8px;color:var(--accent-2);font-weight:600;
+      background:transparent;
+      border:1px solid var(--accent-2);
+      padding:8px 12px;
+      border-radius:6px;
+      cursor:pointer;
+      margin-top:8px;
+      color:var(--accent-2);
+      font-weight:600;
+      letter-spacing:-0.01em;
     }
-    button.cta:hover{background:#7cff8a22}
 
-    hr{border:0;border-top:1px solid #222;margin:26px 0}
+    button.cta:hover{
+      background:#7cff8a22
+    }
+
+    hr{
+      border:0;
+      border-top:1px solid #222;
+      margin:26px 0
+    }
 
     .section{margin-bottom:40px}
 
-    /* about section */
     .about-grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 0 32px;
       margin-top: 12px;
     }
+
     .about-grid p{
       margin: 0;
       font-size: 0.92rem;
       line-height: 1.75;
       color: var(--p);
-    }
-    .about-tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:14px;
-    }
-    .tag{
-      font-size:0.78rem;
-      padding:3px 10px;
-      border:1px solid #2a5c33;
-      border-radius:4px;
-      color:#7cffaa;
-      background:#0d1f11;
-      letter-spacing:0.03em;
     }
 
     @media(max-width:540px){
@@ -93,6 +163,7 @@
       transition:max-height 360ms cubic-bezier(.2,.9,.2,1);
       will-change:max-height;
     }
+
     #extra-writeups.open{ max-height:1200px; }
 
     .expand-divider{
@@ -104,11 +175,6 @@
       user-select:none;
       justify-content:center;
       -webkit-tap-highlight-color: transparent;
-    }
-
-    .expand-divider:focus,
-    .expand-divider:focus-visible{
-      outline:none !important;
     }
 
     .expand-divider .line{
@@ -131,13 +197,13 @@
       transform: rotate(0deg);
     }
 
-    .expand-divider:hover .arrow{background:rgba(90,223,114,0.04);}
+    .expand-divider:hover .arrow{
+      background:rgba(90,223,114,0.04);
+    }
 
     .expand-divider.open .arrow{
       transform: rotate(180deg);
     }
-
-    .expand-divider-wrapper{padding:8px 0;display:block;}
 
     @media (max-width:600px){
       body{margin:20px auto;max-width:92%}
@@ -145,14 +211,6 @@
       h2{font-size:1.15rem}
       .expand-divider .arrow{width:44px;height:44px;font-size:19px}
     }
-
-    details, details *,
-    summary, summary:focus, summary:active {
-      outline: none !important;
-      box-shadow: none !important;
-    }
-
-    summary::-webkit-details-marker{display:none !important;}
   </style>
 </head>
 
@@ -176,97 +234,6 @@
         and air rifle shooting. this site is where i share writeups and notes.
       </p>
     </div>
-    <!--
-    <div class="about-tags">
-      <span class="tag">offensive security</span>
-      <span class="tag">ctf</span>
-      <span class="tag">physical pentesting</span>
-      <span class="tag">philosophy</span>
-      <span class="tag">logic</span>
-      <span class="tag">jiu-jitsu</span>
-    </div>
-    -->
-  </div>
-
-  <hr />
-
-  <div class="section">
-    <h2>&gt; recent writeups</h2>
-
-    <div id="writeups">
-      
-      <div class="wu">
-        <h4>XOR Obfuscation</h4>
-        <a href="https://iftekhar.rocks/blog/posts/XOR-Obfuscation/">link</a>
-        <p>XOR obfuscation is a bare-bones and lightweight method of obfuscating data using the bitwise XOR operation. Data is combined with a key to get a result. "XORing" is useful for evasion of basic static detection in some cases and is easy to implement in shellcode.</p>
-      </div>
-      
-      <div class="wu">
-        <h4>understanding SMB relay attacks</h4>
-        <a href="https://iftekhar.rocks/blog/posts/SMB-Relay-Attacks/">link</a>
-        <p>This guide covers SMB relay attacks. In many AD environments, cracking passwords isn't feasible - however, when SMB signing is not enforced (the default in many setups), an attacker can abuse trust to relay NTLM authentication and gain access without ever knowing the plaintext password.</p>
-      </div>
-      
-      <div class="wu">
-        <h4>using stagers with sliver</h4>
-        <a href="https://iftekhar.rocks/blog/posts/Using-Stagers-with-sliver/">link</a>
-        <p>
-A stager is a small piece of software that has only one primary task: to trigger a larger implant's download and make the initial connection between host and C2. Stagers are small, lightweight and can help in AV evasion where they can potentially run in-memory.</p>
-      </div>
-      
-      <div class="wu">
-        <h4>htb active</h4>
-        <a href="https://iftekhar.rocks/blog/posts/HTB-Active-Writeup/">link</a>
-        <p>Active is an easy windows box where we find encrypted credentials in an unsecured smb share. We can decrypt credentials with a publicly available key to get domain user and perform a kerberoasting attack against the svc_tgs account to get domain admin.</p>
-      </div>
-
-      <div class="wu">
-        <h4>understanding llmnr poisoning</h4>
-        <a href="https://iftekhar.rocks/blog/posts/Understanding-LLMNR-Poisoning/">link</a>
-        <p>This is a guide on llmnr poisoning. When dns fails, a fallback protocol is used named llmnr/nbt-ns. Resource locations are requested from the whole network, and an attacker can respond in exchange for a victim's hashed credentials.</p>
-      </div>
-
-      <div class="wu">
-        <h4>using sliver on linux</h4>
-        <a href="https://iftekhar.rocks/blog/posts/Using-Sliver-On-Linux/">link</a>
-        <p>Walkthrough of using sliverc2 against linux targets. Sliver is a modern cli-based control and command (c2) framework that is extremely flexible, supporting beacons, stagers, mtls/http/dns transport options and more!</p>
-      </div>
-
-      <div class="wu">
-        <h4>htb chemistry</h4>
-        <a href="https://iftekhar.rocks/blog/posts/HTB-Chemistry-Writeup/">link</a>
-        <p>Chemistry is an easy linux box. After gaining a shell through insecure file upload, we can crack internal hashed credentials found in a sql database and laterally move into a user shell. We can then privilege escalate to root by exploiting an internal webpage's path traversal/file inclusion vulnerability to get an ssh key for root.</p>
-      </div>
-
-      <div class="wu">
-        <h4>exploiting suid bits: systemctl</h4>
-        <a href="https://iftekhar.rocks/blog/posts/systemctl-SUID-bit-exploitation/">link</a>
-        <p>This is a post on SUID bits. SUID binaries run with the permissions of their owner. Consequently, root-owned binaries can be ran as root. In this post, we exploited the SUID bit for systemctl to run arbitrary root commands by getting a shell.</p>
-      </div>
-    </div>
-
-    <div class="expand-divider-wrapper">
-      <div id="expandDivider" class="expand-divider" tabindex="0" role="button" aria-expanded="false">
-        <span class="line"></span>
-        <span class="arrow" aria-hidden="true">▼</span>
-        <span class="line"></span>
-      </div>
-    </div>
-
-    <div id="extra-writeups" aria-hidden="true">
-      <div class="wu">
-        <h4>rooting an s20fe with magisk</h4>
-        <a href="https://iftekhar.rocks/blog/posts/Rooting-a-S20FE-with-Magisk/">link</a>
-        <p>In this guide, we sideload magisk on the s20fe to root it. Rooting a device gains elevated privileges on otherwise comparatively more restricted devices.</p>
-      </div>
-
-      <div class="wu">
-        <h4>installing bruce on the lilygo t-embed cc1101</h4>
-        <a href="https://iftekhar.rocks/blog/posts/CFW-TMBCC1101-installation">link</a>
-        <p>The lilygo t-embed cc1101 is a pocket-sized dev board with in-bult subghz, ir, nfc/rfid, ble, wifi, badusb and more. It runs on an esp32-s3. Using brucefw takes full advantage of these capabilities and turns the tmb into a pocket pentesting device.</p>
-      </div>
-    </div>
-
   </div>
 
   <hr />
@@ -274,41 +241,8 @@ A stager is a small piece of software that has only one primary task: to trigger
   <div class="section">
     <h2>&gt; contact</h2>
     <a href="mailto:iftekharsyed@proton.me">send me an email</a><br>
+    <a href="https://github.com/epk/SF-Mono-Nerd-Font">font used</a><br>
   </div>
 
-<script>
-(function(){
-  const divider = document.getElementById('expandDivider');
-  const extra = document.getElementById('extra-writeups');
-  let isOpen = false;
-
-  function setOpen(open){
-    if(open){
-      extra.classList.add('open');
-      extra.setAttribute('aria-hidden','false');
-      divider.classList.add('open');
-      divider.setAttribute('aria-expanded','true');
-    } else {
-      extra.classList.remove('open');
-      extra.setAttribute('aria-hidden','true');
-      divider.classList.remove('open');
-      divider.setAttribute('aria-expanded','false');
-    }
-  }
-
-  divider.addEventListener('click', () => {
-    isOpen = !isOpen;
-    setOpen(isOpen);
-  });
-
-  divider.addEventListener('keydown', (e) => {
-    if(e.key === "Enter" || e.key === " "){
-      e.preventDefault();
-      isOpen = !isOpen;
-      setOpen(isOpen);
-    }
-  });
-
-})();
-</script></body>
+</body>
 </html>
