@@ -38,11 +38,11 @@
     }
 
     :root {
-      --bg:       #1e1e1e;
+      --bg:         #1e1e1e;
       --muted-line: #2a2a2a;
-      --text:     #ffffff;
-      --muted:    #888888;
-      --mono:     'SFMono Nerd Font', 'SF Mono', 'JetBrains Mono', monospace;
+      --text:       #ffffff;
+      --muted:      #888888;
+      --mono:       'SFMono Nerd Font', 'SF Mono', 'JetBrains Mono', monospace;
     }
 
     html, body {
@@ -221,15 +221,14 @@
     .reading-toggle:focus { outline: none; }
 
     /* $ shell prompt */
-    .reading-cursor {
+    .reading-prompt {
       display: inline-block;
-      margin-right: 4px;
+      margin-right: 2px;
       color: var(--muted);
       font-weight: 700;
       transition: color 180ms;
     }
-    .reading-cursor::before { content: '$'; }
-    .reading-toggle:hover .reading-cursor { color: #aaa; }
+    .reading-toggle:hover .reading-prompt { color: #aaa; }
 
     .reading-chevron {
       font-size: 10px;
@@ -370,7 +369,7 @@
 
     <!-- currently reading -->
     <button class="reading-toggle" id="readingToggle" aria-expanded="false">
-      <span class="reading-cursor" aria-hidden="true"></span>books i'm reading<span class="reading-chevron">▼</span>
+      <span class="reading-prompt" aria-hidden="true">$</span>books i'm reading<span class="reading-chevron">▼</span>
     </button>
 
     <div id="reading-panel" aria-hidden="true">
@@ -378,41 +377,41 @@
 
         <div class="reading-now">
           <div class="reading-now-label">now reading</div>
-          <div class="reading-now-title">The Art of Intrusion</div>
-          <div class="reading-now-author">Kevin D. Mitnick</div>
+          <div class="reading-now-title">The Infinite Book</div>
+          <div class="reading-now-author">John D. Barrow</div>
         </div>
 
-        <div class="reading-list-label">want to read</div>
+        <div class="reading-list-label">next on the list</div>
         <ul class="reading-list">
           <li>
             <span class="li-num">01</span>
-            <span class="li-title">Hacking: The Art of Exploitation</span>
-            <span class="li-author">Jon Erickson</span>
+            <span class="li-title">The Aims of the Philosophers</span>
+            <span class="li-author">Imam al-Ghazali</span>
           </li>
           <li>
             <span class="li-num">02</span>
-            <span class="li-title">The Web Application Hacker's Handbook</span>
-            <span class="li-author">Stuttard & Pinto</span>
+            <span class="li-title">The Incoherence of the Philosophers</span>
+            <span class="li-author">Imam al-Ghazali</span>
           </li>
           <li>
             <span class="li-num">03</span>
-            <span class="li-title">Permanent Record</span>
-            <span class="li-author">Edward Snowden</span>
+            <span class="li-title">The Incoherence of the Incoherence</span>
+            <span class="li-author">Ibn Rushd</span>
           </li>
           <li>
             <span class="li-num">04</span>
-            <span class="li-title">The Muqaddimah</span>
-            <span class="li-author">Ibn Khaldun</span>
+            <span class="li-title">The Art of Deception</span>
+            <span class="li-author">Kevin Mitnick</span>
           </li>
           <li>
             <span class="li-num">05</span>
-            <span class="li-title">Silence on the Wire</span>
-            <span class="li-author">Michal Zalewski</span>
+            <span class="li-title">The Brothers Karamazov</span>
+            <span class="li-author">Dostoyevsky</span>
           </li>
         </ul>
 
         <div class="reading-suggest">
-          <a href="/cdn-cgi/l/email-protection#8ae3ecfeefe1e2ebf8f9f3efeecafaf8e5fee5e4a4e7ef">suggest a book</a>
+          <a href="mailto:iftekharsyed@proton.me">suggest a book</a>
         </div>
 
       </div>
@@ -425,7 +424,12 @@
     <h2>&gt; recent writeups</h2>
 
     <div id="writeups">
-
+      
+      <div class="wu">
+        <h4><a href="https://iftekhar.rocks/blog/posts/2026-03-01-Real-World-XOR-In-Cloudflares-Email-Protection/">REAL WORLD XOR OBFUSCATION: CLOUDFLARE EMAIL PROTECTION</a></h4>
+        <p>After previously discussing XOR obfuscation, we examine a real-world use through Cloudflare's Email Address Obfuscation service, which is used to stop simple bots from scraping emails. This is a short writeup but I thought it was a nice demonstration of XORing.</p>
+      </div>
+      
       <div class="wu">
         <h4><a href="https://iftekhar.rocks/blog/posts/XOR-Obfuscation/">XOR OBFUSCATION</a></h4>
         <p>XOR obfuscation is a bare-bones and lightweight method of obfuscating data using the bitwise XOR operation. Data is combined with a key to get a result. "XORing" is useful for evasion of basic static detection in some cases and is easy to implement in shellcode.</p>
@@ -496,11 +500,11 @@
 
   <div class="section">
     <h2>&gt; contact</h2>
-    <a href="/cdn-cgi/l/email-protection#0c656a786967646d7e7f7569684c7c7e63786362226169">send me an email</a><br>
+    <a href="mailto:iftekharsyed@proton.me">send me an email</a><br>
     <a href="https://github.com/epk/SF-Mono-Nerd-Font">font used</a><br>
   </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── character scramble effect ──
 (function(){
   const el     = document.getElementById('glitch-name');
@@ -590,4 +594,11 @@
     }
   }
 
-  toggle.addEventListener('click
+  toggle.addEventListener('click', () => setOpen(!isOpen));
+  toggle.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(!isOpen); }
+  });
+})();
+</script>
+</body>
+</html>
